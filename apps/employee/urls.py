@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from apps.employee.views import EmployeeViewSet
 
-router = DefaultRouter(trailing_slash=False)
+router = DefaultRouter()
 router.register("", EmployeeViewSet)
 
 urlpatterns = [path("", include(router.urls))]
