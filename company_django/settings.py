@@ -22,7 +22,12 @@ SECRET_KEY = os.getenv("SECRET_KEY", "TES")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["teijiw-django-company.herokuapp.com", "localhost:8000"]
+ALLOWED_HOSTS = [
+    "teijiw-django-company.herokuapp.com",
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -85,11 +90,17 @@ DATABASE_HOST = os.getenv("DATABASE_HOST", "127.0.0.1")
 DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 
 
-default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
+# default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
 
 DATABASES = {
-    "default": dj_database_url.config("DATABASE_URL", default=default_dburl),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "database.sqlite3",
+    }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -127,14 +138,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+# location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# location where you will store your static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "project_name/static")]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 REST_FRAMEWORK = {
-    # "DEFAULT_FILTER_BACKENDS": [
-    #     "django_filters.rest_framework.DjangoFilterBackend",
-    #     "rest_framework.filters.SearchFilter",
-    # ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
