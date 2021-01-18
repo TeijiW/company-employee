@@ -83,11 +83,6 @@ WSGI_APPLICATION = "company_django.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 SECRET_KEY = os.getenv("SECRET_KEY", "TES")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "django_companies")
-DATABASE_USER = os.getenv("DATABASE_USER", "postgres")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "123")
-DATABASE_HOST = os.getenv("DATABASE_HOST", "127.0.0.1")
-DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 
 
 # default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
