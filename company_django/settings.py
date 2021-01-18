@@ -2,6 +2,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pathlib import Path  # Python 3.6+ only
 from dj_database_url import parse as dburl
+import dj_database_url
 import os
 
 env_path = Path(".") / ".env"
@@ -87,7 +88,7 @@ DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
 
 DATABASES = {
-    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    "default": dj_database_url.config("DATABASE_URL", default=default_dburl),
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
