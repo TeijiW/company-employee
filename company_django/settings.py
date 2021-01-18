@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "TES")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "teijiw-django-company.herokuapp.com",
@@ -82,7 +82,7 @@ WSGI_APPLICATION = "company_django.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-SECRET_KEY = os.getenv("SECRET_KEY", "TES")
+SECRET_KEY = os.getenv("SECRET_KEY", "DEFAULT_KEY")
 
 
 # default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
