@@ -16,7 +16,8 @@ Since you has been created a super user, you is able to use the API
 
 ## Token
 
-- **POST** - `/api/api-token-auth/`
+- **POST** - `/api/api-token-auth/` 
+  - Make request with body `{"username": "", "password": ""}`
 
 ## Company (/api)
 - **GET**
