@@ -1,0 +1,1 @@
+web: gunicorn company-django.wsgi

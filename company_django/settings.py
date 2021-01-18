@@ -1,10 +1,11 @@
 from pathlib import Path
 from dotenv import load_dotenv
 from pathlib import Path  # Python 3.6+ only
+from dj_database_url import parse as dburl
+import os
 
 env_path = Path(".") / ".env"
 load_dotenv(dotenv_path=env_path)
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "TES")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["teijiw-django-company.herokuapp.com", "localhost:8000"]
 
 
 # Application definition
@@ -83,22 +84,11 @@ DATABASE_HOST = os.getenv("DATABASE_HOST", "127.0.0.1")
 DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 
 
+default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
+
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "database.sqlite3",
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": DATABASE_NAME,
-        "USER": DATABASE_USER,
-        "PASSWORD": DATABASE_PASSWORD,
-        "HOST": DATABASE_HOST,
-        "PORT": DATABASE_PORT,
-    }
+    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -136,6 +126,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 REST_FRAMEWORK = {
     # "DEFAULT_FILTER_BACKENDS": [
