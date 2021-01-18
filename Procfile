@@ -1,1 +1,1 @@
-web: gunicorn company-django.wsgi
+web: gunicorn company_django.wsgi
